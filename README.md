@@ -1,6 +1,6 @@
 # Shared Code for GitHub Actions
 
-This library provides code for use with [@hashicorp](https://github.com/hashicorp/) GitHub Actions.
+Core functions for use with [@hashicorp](https://github.com/hashicorp/) GitHub Actions.
 
 ## Table of Contents
 
