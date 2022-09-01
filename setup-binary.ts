@@ -31,6 +31,9 @@ async function fetchBinary(binaryName: string, version: string, userAgent: strin
   let binaryPath: string;
 
   core.info(`Finding release that matches ${version}.`);
+  core.info(`binaryName ${binaryName}.`);
+  core.info(`version ${version}.`);
+  core.info(`userAgent ${userAgent}.`);
   let release = await hc.getRelease(binaryName, version, userAgent);
 
   const nameAndVersion = binaryName + ` ` + version;
