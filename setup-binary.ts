@@ -8,37 +8,33 @@ import path from "path";
 import { ok } from "assert";
 
 // TODO: cleanup
-const BINARY_NAME = "nomad-pack";
-const USER_AGENT = "setup-${BINARY_NAME} (GitHub Actions)";
 
-export async function setupBinary(binary: string, version: string) {
-  const versionSpec = core.getInput("version");
+export async function setupBinary(binaryName: string, version: string) {
+  let userAgent = `setup-${binaryName} (GitHub Actions)`;
+  let binaryPath = await fetchBinary(version, binaryName, userAgent);
 
-  let binaryPath = await fetchBinary(versionSpec);
-
-  core.info(`Adding ` + BINARY_NAME + ` to PATH.`);
+  core.info(`Adding ` + binaryName + ` to PATH.`);
   core.addPath(binaryPath);
 
-  let binary = await io.which(BINARY_NAME);
+  let binary = await io.which(binaryName);
   let binaryVersion = (cp.execSync(`${binary} version`) || "").toString();
 
   core.info(binaryVersion);
   core.setOutput("version", parseVersion(binaryVersion));
 }
 
-export async function fetchBinary(versionSpec: string): Promise<string> {
+async function fetchBinary(binaryName: string, version: string, userAgent: string): Promise<string> {
   const osPlatform = sys.getPlatform();
   const osArch = sys.getArch();
   const tmpDir = getTempDir();
 
   let binaryPath: string;
 
-  core.info(`Finding release that matches ${versionSpec}.`);
-  let release = await hc.getRelease(BINARY_NAME, versionSpec, USER_AGENT);
+  core.info(`Finding release that matches ${version}.`);
+  let release = await hc.getRelease(binaryName, version, userAgent);
 
-  const { version } = release;
-  const nameAndVersion = BINARY_NAME + ` ` + version;
-  const nameAndPlatform = BINARY_NAME + `_${osPlatform}`;
+  const nameAndVersion = binaryName + ` ` + version;
+  const nameAndPlatform = binaryName + `_${osPlatform}`;
 
   core.info(`Found ${nameAndVersion}.`);
 
@@ -62,7 +58,7 @@ export async function fetchBinary(versionSpec: string): Promise<string> {
   let downloadPath = path.join(tmpDir, build.filename);
 
   core.debug(`Download path: ${downloadPath}`);
-  await release.download(build.url, downloadPath, USER_AGENT);
+  await release.download(build.url, downloadPath, userAgent);
 
   core.info(`Verifying ${build.filename}.`);
   await release.verify(downloadPath, build.filename);
