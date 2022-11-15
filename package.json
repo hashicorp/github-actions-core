@@ -24,7 +24,6 @@
     "@actions/io": "^1.1.2",
     "@actions/tool-cache": "^2.0.1",
     "@hashicorp/js-releases": "^1.6.1",
-    "axios": "^0.27.2",
     "ncc": "^0.3.6"
   },
   "devDependencies": {
