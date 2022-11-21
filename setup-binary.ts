@@ -36,7 +36,7 @@ async function fetchBinary(binaryName: string, version: string, userAgent: strin
 
   const isValidVersion = semver.validRange(version);
   if (!isValidVersion && version !== "latest") {
-    throw "Invalid version, only valid semver versions or 'latest' are allowed"
+    throw new Error("Invalid version, only valid semver versions or 'latest' are allowed")
   }
 
   let release = await hc.getRelease(binaryName, version, userAgent);
