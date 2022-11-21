@@ -18,7 +18,6 @@ export async function setupBinary(binaryName: string, version: string) {
   let binary = await io.which(binaryName);
   let binaryVersion = (cp.execSync(`${binary} version`) || "").toString();
 
-  core.info(binaryVersion);
   core.setOutput("version", parseVersion(binaryVersion));
 }
 
@@ -30,9 +29,6 @@ async function fetchBinary(binaryName: string, version: string, userAgent: strin
   let binaryPath: string;
 
   core.info(`Finding release that matches ${version}.`);
-  core.info(`binaryName ${binaryName}.`);
-  core.info(`version ${version}.`);
-  core.info(`userAgent ${userAgent}.`);
 
   const isValidVersion = semver.validRange(version);
   if (!isValidVersion && version !== "latest") {
