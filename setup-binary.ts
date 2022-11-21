@@ -7,11 +7,9 @@ import cp from "child_process";
 import path from "path";
 import { ok } from "assert";
 
-// TODO: cleanup
-
 export async function setupBinary(binaryName: string, version: string) {
   let userAgent = `setup-${binaryName} (GitHub Actions)`;
-  let binaryPath = await fetchBinary(version, binaryName, userAgent);
+  let binaryPath = await fetchBinary(binaryName, version, userAgent);
 
   core.info(`Adding ` + binaryName + ` to PATH.`);
   core.addPath(binaryPath);
