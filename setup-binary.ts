@@ -3,7 +3,7 @@ import * as hc from "@hashicorp/js-releases";
 import * as io from "@actions/io";
 import * as cache from "@actions/tool-cache";
 import * as sys from "./system";
-import * as semver from 'semver';
+import * as semver from "semver";
 import cp from "child_process";
 import path from "path";
 import { ok } from "assert";
@@ -21,7 +21,11 @@ export async function setupBinary(binaryName: string, version: string) {
   core.setOutput("version", parseVersion(binaryVersion));
 }
 
-async function fetchBinary(binaryName: string, version: string, userAgent: string): Promise<string> {
+async function fetchBinary(
+  binaryName: string,
+  version: string,
+  userAgent: string
+): Promise<string> {
   const osPlatform = sys.getPlatform();
   const osArch = sys.getArch();
   const tmpDir = getTempDir();
@@ -32,7 +36,9 @@ async function fetchBinary(binaryName: string, version: string, userAgent: strin
 
   const isValidVersion = semver.validRange(version);
   if (!isValidVersion && version !== "latest") {
-    throw new Error("Invalid version, only valid semver versions or 'latest' are allowed")
+    throw new Error(
+      "Invalid version, only valid semver versions or 'latest' are allowed"
+    );
   }
 
   let release = await hc.getRelease(binaryName, version, userAgent);
