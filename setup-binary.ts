@@ -12,9 +12,8 @@ export async function setupBinary(binaryName: string, version: string) {
   let userAgent = `setup-${binaryName} (GitHub Actions)`;
   let binaryPath = await fetchBinary(binaryName, version, userAgent);
 
-  core.info(`Adding ` + binaryName + ` to PATH.`);
   core.addPath(binaryPath);
-
+  core.info(`${binaryName}:${version} added to path`)
   let binary = await io.which(binaryName);
   let binaryVersion = (cp.execSync(`${binary} version`) || "").toString();
 
@@ -32,7 +31,7 @@ async function fetchBinary(
 
   let binaryPath: string;
 
-  core.info(`Finding release that matches ${version}.`);
+  core.debug(`Finding release that matches ${version}.`);
 
   const isValidVersion = semver.validRange(version);
   if (!isValidVersion && version !== "latest") {
@@ -45,21 +44,21 @@ async function fetchBinary(
   const nameAndVersion = binaryName + ` ` + version;
   const nameAndPlatform = binaryName + `_${osPlatform}`;
 
-  core.info(`Found ${nameAndVersion}.`);
+  core.debug(`Found ${nameAndVersion}.`);
 
-  core.info(`Checking cache for ${nameAndVersion}.`);
+  core.debug(`Checking cache for ${nameAndVersion}.`);
 
   core.debug(`Cache binary: ${nameAndPlatform}`);
   binaryPath = cache.find(nameAndPlatform, version);
 
   if (binaryPath) {
-    core.info(`Found ${nameAndVersion} in cache at ${binaryPath}.`);
+    core.debug(`Found ${nameAndVersion} in cache at ${binaryPath}.`);
     return binaryPath;
   }
 
-  core.info(`${nameAndVersion} not found in cache.`);
+  core.debug(`${nameAndVersion} not found in cache.`);
 
-  core.info(`Getting download URL for ${nameAndVersion}.`);
+  core.debug(`Getting download URL for ${nameAndVersion}.`);
   let build = release.getBuild(osPlatform, osArch);
   core.debug(`Download URL: ${build.url}`);
 
@@ -69,15 +68,15 @@ async function fetchBinary(
   core.debug(`Download path: ${downloadPath}`);
   await release.download(build.url, downloadPath, userAgent);
 
-  core.info(`Verifying ${build.filename}.`);
+  core.debug(`Verifying ${build.filename}.`);
   await release.verify(downloadPath, build.filename);
 
-  core.info(`Extracting ${build.filename}.`);
+  core.debug(`Extracting ${build.filename}.`);
   const extractedPath = await cache.extractZip(downloadPath);
   core.debug(`Extracted path: ${extractedPath}`);
 
   binaryPath = await cache.cacheDir(extractedPath, nameAndPlatform, version);
-  core.info(`Cached ${nameAndVersion} at ${binaryPath}.`);
+  core.debug(`Cached ${nameAndVersion} at ${binaryPath}.`);
 
   return binaryPath;
 }
