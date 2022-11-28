@@ -2,7 +2,7 @@ import * as core from "@actions/core";
 import { setupBinary } from "./setup-binary";
 
 export async function getHashicorpRelease(binary: string, version: string) {
-  if (version !== "") {
+  if (version === "") {
     version = "latest"
   }
   core.info(`Installing ${binary}:${version} and adding it to GitHub Actions Path`);
