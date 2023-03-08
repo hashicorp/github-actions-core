@@ -9,11 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
 
-   steps:
-     - name: Checkout Repository
-       uses: actions/checkout@v3
-       with:
-         fetch-depth: 1
     strategy:
       # see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstrategyfail-fast
       fail-fast: false
@@ -27,6 +22,11 @@ jobs:
        with:
          # see https://github.com/snyk/actions/tree/master/node#uploading-snyk-scan-results-to-github-code-scanning
          args: --policy-path=.snyk --sarif-file-output=snyk.sarif --org=${{ secrets.SNYK_ORG }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
 
 #      # see https://github.com/github/codeql-action/tree/main/upload-sarif
 #      - name: Upload Snyk IaC results to GitHub Code Scanning
