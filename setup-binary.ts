@@ -18,7 +18,7 @@ export async function setupBinary(binaryName: string, version: string) {
   let binaryPath = await fetchBinary(binaryName, version, userAgent);
 
   core.addPath(binaryPath);
-  core.info(`${binaryName}:${version} added to path`)
+  core.info(`${binaryName}:${version} added to path`);
   let binary = await io.which(binaryName);
   let binaryVersion = (cp.execSync(`${binary} version`) || "").toString();
 
@@ -95,7 +95,6 @@ function getTempDir(): string {
   ok(tmpDir, "Expected RUNNER_TEMP to be defined");
   return tmpDir;
 }
-
 
 function getPlatform(): string {
   const platform = os.platform();
