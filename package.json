@@ -24,7 +24,7 @@
     "@actions/io": "^1.1.2",
     "@actions/tool-cache": "^2.0.1",
     "@hashicorp/js-releases": "^1.6.1",
-    "semver": "^7.3.8"
+    "semver": "^7.5.2"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.36.1",
