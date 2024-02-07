@@ -28,7 +28,7 @@ export async function setupBinary(binaryName: string, version: string) {
 async function fetchBinary(
   binaryName: string,
   version: string,
-  userAgent: string
+  userAgent: string,
 ): Promise<string> {
   const osPlatform = getPlatform();
   const osArch = getArch();
@@ -41,7 +41,7 @@ async function fetchBinary(
   const isValidVersion = semver.validRange(version);
   if (!isValidVersion && version !== "latest") {
     throw new Error(
-      "Invalid version, only valid semver versions or 'latest' are allowed"
+      "Invalid version, only valid semver versions or 'latest' are allowed",
     );
   }
 

@@ -11,7 +11,7 @@ export async function getHashicorpRelease(binary: string, version: string) {
     version = "latest";
   }
   core.info(
-    `Installing ${binary}:${version} and adding it to GitHub Actions Path`
+    `Installing ${binary}:${version} and adding it to GitHub Actions Path`,
   );
   try {
     await setupBinary(binary, version);
