@@ -41,7 +41,7 @@ async function fetchBinary(
   const isValidVersion = semver.validRange(version);
   if (!isValidVersion && version !== "latest") {
     throw new Error(
-      "Invalid version, only valid semver versions or 'latest' are allowed",
+      "Invalid version, only valid SemVer versions or 'latest' are allowed",
     );
   }
 
