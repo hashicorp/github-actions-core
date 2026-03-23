@@ -4,6 +4,9 @@ name: "Code Quality: TypeScript"
 on:
   push:
 
+permissions:
+  contents: read
+
 jobs:
   nodejs:
     name: Node.js
