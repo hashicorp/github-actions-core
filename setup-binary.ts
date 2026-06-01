@@ -121,7 +121,7 @@ function getArch(): string {
       return "arm";
     case "arm64":
       return "arm64";
-    case "x32":
+    case "ia32":
       return "386";
     case "x64":
       return "amd64";
