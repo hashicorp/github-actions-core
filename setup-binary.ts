@@ -8,7 +8,7 @@ import * as hc from "@hashicorp/js-releases";
 import * as io from "@actions/io";
 import * as cache from "@actions/tool-cache";
 import * as semver from "semver";
-import os from "os";
+import * as os from "os";
 import cp from "child_process";
 import path from "path";
 import { ok } from "assert";
