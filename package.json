@@ -22,7 +22,7 @@
   "dependencies": {
     "@actions/core": "^3.0.1",
     "@actions/io": "^3.0.2",
-    "@actions/tool-cache": "^3.0.1",
+    "@actions/tool-cache": "^4.0.0",
     "@hashicorp/js-releases": "^1.7.7",
     "axios": "^1.20.0",
     "semver": "^7.8.5"
