@@ -4,7 +4,7 @@
   "description": "A library of functions shared between GitHub Actions.",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "tsc && ncc build --no-cache",
+    "build": "tsc && ncc build dist/index.js --no-cache",
     "fmt": "prettier --write '*.ts'"
   },
   "publishConfig": {
@@ -20,9 +20,9 @@
   "author": "Kerim Satirli and Jenna Goldstrich",
   "license": "Apache-2.0",
   "dependencies": {
-    "@actions/core": "^2.0.3",
-    "@actions/io": "^1.1.3",
-    "@actions/tool-cache": "^3.0.1",
+    "@actions/core": "^3.0.1",
+    "@actions/io": "^3.0.2",
+    "@actions/tool-cache": "^4.0.0",
     "@hashicorp/js-releases": "^1.7.7",
     "axios": "^1.20.0",
     "semver": "^7.8.5"
