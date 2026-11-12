@@ -1,11 +1,18 @@
 {
   "name": "@hashicorp/github-actions-core",
-  "version": "1.4.0",
+  "version": "2.0.0",
+  "type": "module",
   "description": "A library of functions shared between GitHub Actions.",
   "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc && ncc build dist/index.js --no-cache",
-    "fmt": "prettier --write '*.ts'"
+    "build": "tsc",
+    "fmt": "prettier --write '*.ts'",
+    "prepare": "npm run build",
+    "test": "node --test"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
@@ -30,7 +37,6 @@
   "devDependencies": {
     "@types/node": "^24.0.0",
     "@types/semver": "^7.8.0",
-    "@vercel/ncc": "^0.45.0",
     "prettier": "^3.9.10",
     "typescript": "^6.0.3"
   }
