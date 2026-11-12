@@ -4,7 +4,7 @@
  */
 
 import * as core from "@actions/core";
-import { setupBinary } from "./setup-binary";
+import { setupBinary } from "./setup-binary.js";
 
 export async function getHashicorpRelease(binary: string, version: string) {
   if (version === "") {

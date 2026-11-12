@@ -4,6 +4,7 @@
     "target": "es6",
     "module": "es2022",
     "moduleResolution": "bundler",
+    "declaration": true,
     "types": ["node"],
     "outDir": "./dist",
     "pretty": true,
@@ -12,5 +13,5 @@
     "sourceMap": true,
     "strict": true
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
