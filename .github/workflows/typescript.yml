@@ -39,3 +39,6 @@ jobs:
 
       - name: Build TypeScript code
         run: npm run-script build
+
+      - name: Test package contents
+        run: npm test

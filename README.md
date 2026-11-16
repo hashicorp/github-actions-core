@@ -6,8 +6,26 @@ Core functions for use with [@hashicorp](https://github.com/hashicorp/) GitHub A
 
 - [Shared Code for GitHub Actions](#shared-code-for-github-actions)
   - [Table of Contents](#table-of-contents)
+  - [Development and packaging](#development-and-packaging)
   - [Author Information](#author-information)
   - [License](#license)
+
+## Development and packaging
+
+Use Node.js 24 to build and test this package:
+
+```sh
+npm ci
+npm test
+```
+
+The `prepare` script builds unbundled JavaScript and TypeScript declarations in
+`dist/` during local installation, packing, and Git dependency installation.
+Generated files are not committed. Runtime dependencies remain external so
+consuming actions can apply their own dependency overrides.
+
+The package test packs a clean source copy and checks that its JavaScript and type
+entry points are included and the public API can be imported.
 
 ## Author Information
 
